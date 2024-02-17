@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  bl_app:
+    build: ./BL-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./BL-app:/app
+
+  dhp_app:
+    build: ./DHP-app
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./DHP-app:/app
+
+  frcm_app:
+    build: ./FRCM-app
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./FRCM-app:/app
