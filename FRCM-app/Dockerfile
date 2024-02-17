@@ -34,10 +34,11 @@ COPY ./FRCM-app/pyproject.toml ./FRCM-app/poetry.lock ./
 # Project initialization:
 # Install runtime dependencies using poetry.
 RUN poetry install --no-dev
+RUN ls -la
 
 # Copy project files into the docker image
 WORKDIR /app
-COPY ./FRCM-app /app
+COPY . /app
 
 # Run the application on port 8000 using Uvicorn
 CMD ["uvicorn", "FRCM.asgi:application", "--host", "0.0.0.0", "--port", "8000"]

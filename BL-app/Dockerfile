@@ -29,15 +29,16 @@ RUN apt-get update \
 
 # Copy only requirements to cache them in docker layer
 WORKDIR $PYSETUP_PATH
-COPY ./DHP-app/pyproject.toml ./DHP-app/poetry.lock ./
+COPY ./BL-app/pyproject.toml ./BL-app/poetry.lock ./
 
 # Project initialization:
 # Install runtime dependencies using poetry.
 RUN poetry install --no-dev
+RUN ls -la
 
 # Copy project files into the docker image
 WORKDIR /app
-COPY ./DHP-app /app
+COPY . /app
 
-# Run the application on port 8001 using Uvicorn
-CMD ["uvicorn", "DHP.asgi:application", "--host", "0.0.0.0", "--port", "8001"]
+# Run the application on port 8000 using Uvicorn
+CMD ["uvicorn", "BL.asgi:application", "--host", "0.0.0.0", "--port", "8000"]

@@ -6,8 +6,6 @@ db.sqlite3
 .env
 .venv
 .git
-.gitignore
-Dockerfile
 *.md
 LICENSE
 *.yml
