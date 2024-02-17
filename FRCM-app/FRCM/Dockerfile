@@ -29,7 +29,7 @@ RUN apt-get update \
 
 # Copy only requirements to cache them in docker layer
 WORKDIR $PYSETUP_PATH
-COPY ./BL-app/pyproject.toml ./BL-app/poetry.lock ./
+COPY ./FRCM-app/pyproject.toml ./FRCM-app/poetry.lock ./
 
 # Project initialization:
 # Install runtime dependencies using poetry.
@@ -37,7 +37,7 @@ RUN poetry install --no-dev
 
 # Copy project files into the docker image
 WORKDIR /app
-COPY ./BL-app /app
+COPY ./FRCM-app /app
 
 # Run the application on port 8000 using Uvicorn
-CMD ["uvicorn", "myproject.asgi:application", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "FRCM.asgi:application", "--host", "0.0.0.0", "--port", "8000"]

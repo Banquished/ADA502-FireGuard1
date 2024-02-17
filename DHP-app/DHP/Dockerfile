@@ -39,5 +39,5 @@ RUN poetry install --no-dev
 WORKDIR /app
 COPY ./DHP-app /app
 
-# Run the application on port 8000 using Uvicorn
-CMD ["uvicorn", "myproject.asgi:application", "--host", "0.0.0.0", "--port", "8000"]
+# Run the application on port 8001 using Uvicorn
+CMD ["uvicorn", "DHP.asgi:application", "--host", "0.0.0.0", "--port", "8001"]
