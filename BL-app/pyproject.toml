@@ -6,8 +6,8 @@ authors = ["Ole <105752308+Banquished@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-django = "^5.0.2"
+python = "3.11.8"
+django = "5.0.2"
 
 
 [build-system]

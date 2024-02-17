@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.11]
+        python-version: [3.11.8]
         django-service: [BL-app, DHP-app, FRCM-app]
 
     steps:
