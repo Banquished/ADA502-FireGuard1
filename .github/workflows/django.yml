@@ -45,3 +45,9 @@ jobs:
       run: |
         cd ${{ matrix.django-service }}
         poetry run python manage.py test
+
+    - name: Run tests for FRCM-app
+      if: matrix.django-service == 'FRCM-app'
+      run: |
+        cd FRCM-app/FRCM/tests
+        poetry run pytest

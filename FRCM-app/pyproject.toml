@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Lars Michael Kristensen <lmkr@users.noreply.github.com>"]
 readme = "README.md"
-packages = [{include = "frcm", from = "src"}]
+packages = [{include = "frcm", from = "FRCM/src"}]
 
 
 [tool.poetry.dependencies]
