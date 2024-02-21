@@ -9,11 +9,21 @@ html, body {
 
 .container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     grid-template-rows: auto 1fr auto; 
     grid-gap: 10px;
     height: 100vh; 
     max-width: 1980px;
+    margin: 0 auto;
+}
+
+
+
+.map-info,
+.map-container {
+    padding: 1rem; 
+    background-color: #212121;
+    border-radius: 10px;
 }
 
 .header {
@@ -41,12 +51,13 @@ nav a:hover {
     background-color: #e4a57b;
 }
 
-.left,
-.right {
-    padding: 1rem; 
-    background-color: #212121;
+
+#map {
+    height: 500px;
     border-radius: 10px;
+    color: #171717;
 }
+
 
 .full-width {
     grid-column: 1 / span 2;

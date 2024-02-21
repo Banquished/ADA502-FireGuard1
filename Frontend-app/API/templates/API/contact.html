@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'API/CSS/contact.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>FireGuard Project</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>FireGuard</h1>
+            <nav>
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'map'  %}">Map</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </nav>
+        </div>
+        <div class="footer">
+            &copy; FireGuard | Designed by Group 1
+        </div>
+    </div>
+</body>
+</html>

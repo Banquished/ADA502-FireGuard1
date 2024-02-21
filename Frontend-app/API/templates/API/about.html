@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'API/CSS/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>FireGuard Project</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>FireGuard</h1>
+            <nav>
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'map'  %}">Map</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </nav>
+        </div>
+        <div class="left">
+            <h3>About FireGuard</h3>
+            <p>
+                FireGuard is a school project in the course ADA502. <br>
+                The goal of the project is to create a web application that can track and monitor 
+                the risk of fires setting out in wooden-buildings in Norway.
+            </p>
+            <p>It is built using the following technologies:</p>
+            <ul>
+                <li>Django</li>
+                <li>React</li>
+                <li>Docker</li>
+                <li>SQLite</li>
+            </ul>
+            <p>It is currently hosted locally with SQLite databases.</p>
+            <p>The project follows a microservice architecture and is a part of Lars Michael Kristensens FRCM project.</p>
+            <p>It is built by the following developers:</p>
+            <ul>
+                <li>Ole-Marius O. Ask</li>
+                <li>Sivert H. Benjaminsen</li>
+                <li>Kim André N. Trengereid</li>
+                <li>Halldor B. Thorsteinsson </li>
+            </ul>
+            <p>For more information, please visit the official <a href=https://github.com/selabhvl/dynamic-frcm>GitHub Repository</a>
+            <p>
+                <button onclick="popup()">Click me!</button>
+                <script src="{% static 'API/JS/main.js' %}"></script>   
+            </p>
+        </div>
+        <div class="right">
+            <img src="{% static 'API/images/Kimmelim.png' %}" alt="FireGuard Logo" style="border-radius: 10px">
+        </div>
+        <div class="full-width">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                Delectus asperiores blanditiis totam sequi vitae quam consectetur quo magnam nostrum veritatis hic 
+                laborum quae voluptas officiis, culpa sit adipisci sint vero!</p>
+        </div>
+        <div class="footer">
+            &copy; FireGuard | Designed by Group 1
+        </div>
+    </div>
+</body>
+</html>

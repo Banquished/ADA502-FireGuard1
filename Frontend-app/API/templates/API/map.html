@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% static 'API/JS/maps.js' %}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQI5iKUBZozRPj0TMYEPL6puVkTeqNgHA&callback=initMap" async defer></script> <!--- Google Maps API Key bør ikke stores direkte i koden, må se på løsninger her. -->
+        <link rel="stylesheet" type="text/css" href="{% static 'API/CSS/maps.css' %}">
+        <link rel="shortcut icon" type="image/webp" href="{% static 'API/images/FireGuard Logo.webp' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <title>FireGuard Map</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>FireGuard</h1>
+                <nav>
+                    <a href="{% url 'index' %}">Home</a>
+                    <a href="{% url 'map'  %}">Map</a>
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </nav>
+            </div>
+            <div class="map-info">
+                <h3>FireGuard Locations</h3>
+                <p>The FireGuard Project aims to track all the major citites in Norway.
+                    <br><br>Currently we are tracking the following cities:
+                </p>
+                <p>
+                    <li>Bergen</li>
+                    <li>Oslo</li>
+                    <li>Stavanger</li>
+                    <li>Kristiansand</li>
+                </p>
+            </div>
+            <div class="map-container">
+                <h3>Google Maps</h3>
+                <p>
+                    This is a map of the locations that FireGuard currently monitors:
+                </p>
+                <div id="map"></div>
+            </div>
+            <div class="full-width">
+                <p>If you have any requests for additional cities to monitor, please contact us via the contact page</p>
+            </div>
+            <div class="footer">
+                &copy; FireGuard | Designed by Group 1
+            </div>
+        </div>
+    </body>
+</html>

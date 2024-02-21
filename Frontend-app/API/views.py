@@ -9,6 +9,10 @@ def index(request):
     context = {}
     return render(request, 'API/index.html', context)
 
+def map(request):
+    context = {}
+    return render(request, 'API/map.html', context)
+
 def about(request):
     context = {}
     return render(request, 'API/about.html', context)
