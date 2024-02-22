@@ -20,4 +20,3 @@ def about(request):
 def contact(request):
     context = {}
     return render(request, 'API/contact.html', context)
-
