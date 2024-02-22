@@ -1,6 +1,7 @@
 import datetime
 
 from pydantic import BaseModel
+from django.db import models
 
 
 class Location(BaseModel):
@@ -89,3 +90,14 @@ class FireRiskPrediction(BaseModel):
         format_str += '\n'.join(data_str)
 
         return format_str
+
+class FireRiskData(models.Model):
+    location_name = models.CharField(max_length=100) 
+    temperature = models.FloatField()
+    humidity = models.FloatField()
+    wind_speed = models.FloatField()
+    timestamp = models.DateTimeField()
+    
+
+    def __str__(self):
+        return self.location_name  
