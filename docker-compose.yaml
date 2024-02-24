@@ -21,3 +21,10 @@ services:
       - "8002:8000"
     volumes:
       - ./FRCM-app:/app
+
+  frontend-app:
+    build: ./frontend-app
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./frontend-app:/app
