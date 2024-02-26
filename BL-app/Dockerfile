@@ -9,7 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1s
 
 # Copy Project
-COPY /BL-app/BL /app/BL
+COPY /BL-app/BL/ /app/BL/
 COPY /BL-app/db.sqlite3 /app/
 COPY /BL-app/manage.py /app/
 COPY /BL-app/pyproject.toml /app/

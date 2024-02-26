@@ -9,7 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1s
 
 # Copy Project
-COPY /FRCM-app/FRCM /app/FRCM
+COPY /FRCM-app/FRCM/ /app/FRCM/
 COPY /FRCM-app/db.sqlite3 /app/
 COPY /FRCM-app/manage.py /app/
 COPY /FRCM-app/pyproject.toml /app/

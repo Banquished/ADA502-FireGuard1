@@ -9,8 +9,8 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1s
 
 # Copy Project
-COPY /Frontend-app/API /app/API
-COPY /Frontend-app/frontend /app/frontend
+COPY /Frontend-app/API/ /app/API/
+COPY /Frontend-app/frontend/ /app/frontend/
 COPY /Frontend-app/db.sqlite3 /app/
 COPY /Frontend-app/manage.py /app/
 COPY /Frontend-app/pyproject.toml /app/
