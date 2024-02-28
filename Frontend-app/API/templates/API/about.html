@@ -7,59 +7,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'API/CSS/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <title>FireGuard Project</title>
+    <link rel="shortcut icon" type="image/webp" href="{% static 'API/images/FireGuard Logo.webp' %}">
+    <link rel="stylesheet" href="https://cdn.swecogroup.com/sweco-digital-platforms/5.1.2/fonts/fonts.css">
+    <link rel="stylesheet" href="https://cdn.swecogroup.com/sweco-digital-platforms/5.1.2/icons/css/all.min.css">
+    <script src="{% static 'API/JS/maps.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQI5iKUBZozRPj0TMYEPL6puVkTeqNgHA&callback=initMap" async defer></script> <!--- Google Maps API Key bør ikke stores direkte i koden, må se på løsninger her. -->
+    <title>FireGuard About</title>
 </head>
 <body>
+    <header>
+        <h1 id="title">FireGuard</h1>
+        <nav class="navigation">
+            <button class="btn"><a href="{% url 'index' %}">Home</a></button>
+            <button class="btn"><a href="{% url 'map'  %}">Map</a></button>
+            <button class="btn"><a href="{% url 'about' %}">About</a></button>
+            <button class="btn"><a href="{% url 'contact' %}">Contact</a></button>
+        </nav>
+    </header>
     <div class="container">
-        <div class="header">
-            <h1>FireGuard</h1>
-            <nav>
-                <a href="{% url 'index' %}">Home</a>
-                <a href="{% url 'map'  %}">Map</a>
-                <a href="{% url 'about' %}">About</a>
-                <a href="{% url 'contact' %}">Contact</a>
-            </nav>
-        </div>
-        <div class="left">
-            <h3>About FireGuard</h3>
+        <div class="column">
+            <h1>About</h1>
             <p>
-                FireGuard is a school project in the course ADA502. <br>
-                The goal of the project is to create a web application that can track and monitor 
-                the risk of fires setting out in wooden-buildings in Norway.
+                FireGuard is a web application that allows people to check the fire risk for their homes at
+                any given time, based on longitude and latitude. 
+                <br>
+                Users can view the location of their homes on a map and receive notifications when time to 
+                flashover is below a certain threshhold near the specified location.
+                <br>
+                With FireGuard, users can stay informed and take action to protect themselves from the threat 
+                of fires.
+                <br>
+                <br>
+                The FireGuard project is still in beta. This means we're only providing risk calculations for 
+                the a small amount of locations. Check out the <a href="{% url 'map' %}">map</a> page to see
+                which locations we currently support.
             </p>
-            <p>It is built using the following technologies:</p>
-            <ul>
-                <li>Django</li>
-                <li>React</li>
-                <li>Docker</li>
-                <li>SQLite</li>
-            </ul>
-            <p>It is currently hosted locally with SQLite databases.</p>
-            <p>The project follows a microservice architecture and is a part of Lars Michael Kristensens FRCM project.</p>
-            <p>It is built by the following developers:</p>
-            <ul>
-                <li>Ole-Marius O. Ask</li>
-                <li>Sivert H. Benjaminsen</li>
-                <li>Kim André N. Trengereid</li>
-                <li>Halldor B. Thorsteinsson </li>
-            </ul>
-            <p>For more information, please visit the official <a href=https://github.com/selabhvl/dynamic-frcm>GitHub Repository</a>
+            <h2>How does it work?</h2>
             <p>
-                <button onclick="popup()">Click me!</button>
-                <script src="{% static 'API/JS/main.js' %}"></script>   
+                FireGuard uses a combination of data sources to calculate the fire risk for a given location.
+                <br>
+                The main data sources are weather data and forecasts from the MET and Storm. 
+                The data is fetched once every 'x' hours, and is used to calculate the current 
+                fire risk for a given location via the time to flashover at that location.
+                <br>
+                Time to flashover is the time it takes from conflagration to a full-scale fire at a location.
             </p>
-        </div>
-        <div class="right">
-            <img src="{% static 'API/images/Kimmelim.png' %}" alt="FireGuard Logo" style="border-radius: 10px">
-        </div>
-        <div class="full-width">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                Delectus asperiores blanditiis totam sequi vitae quam consectetur quo magnam nostrum veritatis hic 
-                laborum quae voluptas officiis, culpa sit adipisci sint vero!</p>
-        </div>
-        <div class="footer">
-            &copy; FireGuard | Designed by Group 1
+            <h2>FireRisk Calculations</h2>
+            <p>
+                The calculations are done with an implementation by R.D. Strand and L.M. Kristensen, the
+                implementation is described in the submitted paper: <br> 
+                <abbr>
+                    <i>
+                        An implementation, evaluation and validation of a dynamic fire and conflagration risk
+                        indicator for wooden homes.
+                    </i>
+                </abbr>
+            </p>
         </div>
     </div>
+    <footer class="footer">
+        <div class="footer-left">
+            <span>FireGuard</span>
+        </div>
+        <div class="footer-right">
+            <span>&copy; FireGuard</span>
+        </div>
+    </footer>
 </body>
 </html>
