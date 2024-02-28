@@ -9,11 +9,12 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1s
 
 # Copy Project
-COPY /DHP-app/DHP/ /app/DHP/
-COPY /DHP-app/db.sqlite3 /app/
-COPY /DHP-app/manage.py /app/
-COPY /DHP-app/pyproject.toml /app/
-COPY /DHP-app/poetry.lock /app/
+COPY /Frontend-app/API/ /app/API/
+COPY /Frontend-app/frontend/ /app/frontend/
+COPY /Frontend-app/db.sqlite3 /app/
+COPY /Frontend-app/manage.py /app/
+COPY /Frontend-app/pyproject.toml /app/
+COPY /Frontend-app/poetry.lock /app/
 
 # Running bash commands
 RUN pip install pipx
