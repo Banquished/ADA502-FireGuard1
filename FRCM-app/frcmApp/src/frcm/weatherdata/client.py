@@ -14,3 +14,7 @@ class WeatherDataClient:
     @abc.abstractmethod
     def fetch_forecast(self, location: Location) -> Forecast:
         pass
+
+    # @abc.abstractmethod
+    # def get_nearest_station_id(self, location: Location) -> Station_id:
+    #     pass
