@@ -1,4 +1,4 @@
-name: Django CI
+name: All Apps CI-pipeline # Utdatert Apps CI-Pipeline
 
 on:
   push:
