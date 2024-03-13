@@ -8,10 +8,22 @@
 # import django
 # os.environ['DJANGO_SETTINGS_MODULE'] = 'FRCM.settings'
 # django.setup()
+import sys 
+sys.path.insert(0, "src")
+sys.path.insert(0, "../src/FRCM/")
 
+
+print(sys.path)
+
+from frcm.frcapi import FireRiskAPI
+import settings
+
+from src.main import get_city
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FRCM.settings")
+#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FRCM.settings")
+
+settings.co
 
 import django
 django.setup()

@@ -10,7 +10,7 @@ from frcm.datamodel.model import Location
 
 
 def get_city(latitude, longitude):
-    geolocator = Nominatim(user_agent="geoapiExercises")
+    geolocator = Nominatim(user_agent="frcmApp")
     location = geolocator.reverse(f"{latitude},{longitude}")
     address = location.raw['address']
     city = address.get('city', '')
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     # latitude = 58.964
     # longitude = 5.7338
 
-    # Kristiandsand
+    # Kristiansand
     latitude = 58.156
     longitude = 8.0115
 
@@ -66,11 +66,11 @@ if __name__ == "__main__":
 
     predictions = frc.compute_now(location, obs_delta)
 
-    #station_id = METClient.get_nearest_station_id(location)
+    # station_id = METClient.get_nearest_station_id(location)
 
     #city = get_city(latitude, longitude)
     #print(f'City: {city}')
-    #print(station_id)
+    
 
     station_id = met_client.get_nearest_station_id(location)
     print(f"Nearest station ID for {latitude}, {longitude}: {station_id}")
