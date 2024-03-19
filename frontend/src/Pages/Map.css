@@ -2,20 +2,21 @@
   height: calc(100vh - 126px);
   max-width: auto;
   background-color: #1E1E1E;
-  padding: 20px;
 }
 
 .default-styling {
   justify-content:flex-start;
   display: flex;
-  min-height: 20rem;
+  min-height: 2rem;
   text-align: left;
+  padding: 20px;
+  margin-top: 0;
 }
 
-#maps {
-  color: blue;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+.default-styling ul {
+  margin-left: 2rem;
+}
+
+.default-styling h3 {
+  color:#ee9037;
 }

@@ -7,8 +7,8 @@ export default function Contact() {
         <div class="container">
           <div class="row">
             <div>
-              <h1 id="heading">Contact Us</h1>
-              <h3 id="subheading">Dynamic Fire Risk Computational Model</h3>
+              <h1>Contact our Islandic Customer Service/Call-Centre at</h1>
+              <h3>Snapchat: <b>broddi10</b> <br></br> Business hours: WEEKENDS only</h3>
             </div>
           </div>
         </div>
