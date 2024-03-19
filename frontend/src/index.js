@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+<script async defer src={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY_GOOGLE_MAPS}&callback=initMap`} type="text/javascript"></script>
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
