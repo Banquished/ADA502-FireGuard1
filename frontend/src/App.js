@@ -5,7 +5,7 @@ import Header from "./Components/Header.jsx";
 function App() {
   return (
     <>
-      <section id="header">
+      <section>
         <Header />
         <Router />
       </section>
