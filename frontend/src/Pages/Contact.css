@@ -1,0 +1,12 @@
+.container {
+  height: calc(100vh - 126px);
+  max-width: auto;
+  background-color: #1E1E1E;
+  padding: 20px;
+  justify-content: center;
+}
+
+body {
+  background-color: #1E1E1E;
+  color: #E4E4E4;
+}
