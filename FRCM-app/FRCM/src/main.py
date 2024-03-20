@@ -57,3 +57,4 @@ if __name__ == "__main__":
     #         timestamp=predictions['timestamp'],
     #     )
     #     fire_risk_data.save()
+

@@ -1,4 +1,4 @@
-name: Django CI
+name: All Apps CI-pipeline # Utdatert Apps CI-Pipeline
 
 on:
   push:
@@ -49,7 +49,7 @@ jobs:
     - name: Run tests for FRCM-app
       if: matrix.django-service == 'FRCM-app'
       run: |
-        cd FRCM-app/FRCM/tests
+        cd FRCM-app/frcmApp/tests
         poetry run pytest
       env:
         MET_CLIENT_ID: ${{ secrets.MET_CLIENT_ID }}
