@@ -1,103 +1,103 @@
-import datetime
+# import datetime
 
-from pydantic import BaseModel
-from django.db import models
-
-
-class Location(BaseModel):
-
-    latitude: float
-    longitude: float
+# from pydantic import BaseModel
+# from django.db import models
 
 
-class WeatherDataPoint(BaseModel):
+# class Location(BaseModel):
 
-    temperature: float
-    humidity: float
-    wind_speed: float
-    timestamp: datetime.datetime
-
-    def __str__(self):
-
-        format_str = f'WeatherData[{self.timestamp}] {self.temperature, self.humidity, self.wind_speed}]'
-
-        return format_str
+#     latitude: float
+#     longitude: float
 
 
-class Observations(BaseModel):
+# class WeatherDataPoint(BaseModel):
 
-    source: str
-    location: Location
-    data: list[WeatherDataPoint]
+#     temperature: float
+#     humidity: float
+#     wind_speed: float
+#     timestamp: datetime.datetime
 
-    def __str__(self):
-        format_str = f'Observations [Source: {self.source} @ Location: {self.location}]\n'
+#     def __str__(self):
 
-        # Join all data points using '\n' as a separator
-        data_strings = '\n'.join(map(str, self.data))
+#         format_str = f'WeatherData[{self.timestamp}] {self.temperature, self.humidity, self.wind_speed}]'
 
-        return format_str + data_strings + '\n'
-
-
-class Forecast(BaseModel):
-
-    location: Location
-    data: list[WeatherDataPoint]
-
-    def __str__(self):
-        format_str = f'Forecast @ Location: {self.location}\n'
-
-        # Join all data points using '\n' as a separator
-        data_strings = '\n'.join(map(str, self.data))
-
-        return format_str + data_strings + '\n'
+#         return format_str
 
 
-class WeatherData(BaseModel):
+# class Observations(BaseModel):
 
-    created: datetime.datetime
+#     source: str
+#     location: Location
+#     data: list[WeatherDataPoint]
 
-    observations: Observations
-    forecast: Forecast
+#     def __str__(self):
+#         format_str = f'Observations [Source: {self.source} @ Location: {self.location}]\n'
 
-    def to_json(self):
-        return self.model_dump_json()
+#         # Join all data points using '\n' as a separator
+#         data_strings = '\n'.join(map(str, self.data))
 
-
-class FireRisk(BaseModel):
-
-    timestamp: datetime.datetime
-    ttf: float
-
-    def __str__(self):
-        format_str = f'FireRisks[{self.timestamp} {self.ttf}]'
-
-        return format_str
+#         return format_str + data_strings + '\n'
 
 
-class FireRiskPrediction(BaseModel):
+# class Forecast(BaseModel):
 
-    location: Location
-    firerisks: list[FireRisk]
+#     location: Location
+#     data: list[WeatherDataPoint]
 
-    def __str__(self):
-        format_str = f'FireRiskPrediction[{self.location}]\n'
+#     def __str__(self):
+#         format_str = f'Forecast @ Location: {self.location}\n'
 
-        # Generate list of formatted data points
-        data_str = [str(data_point) for data_point in self.firerisks]
+#         # Join all data points using '\n' as a separator
+#         data_strings = '\n'.join(map(str, self.data))
 
-        # Join the list of formatted data points
-        format_str += '\n'.join(data_str)
+#         return format_str + data_strings + '\n'
 
-        return format_str
 
-class FireRiskData(models.Model):
-    location_name = models.CharField(max_length=100) 
-    temperature = models.FloatField()
-    humidity = models.FloatField()
-    wind_speed = models.FloatField()
-    timestamp = models.DateTimeField()
+# class WeatherData(BaseModel):
+
+#     created: datetime.datetime
+
+#     observations: Observations
+#     forecast: Forecast
+
+#     def to_json(self):
+#         return self.model_dump_json()
+
+
+# class FireRisk(BaseModel):
+
+#     timestamp: datetime.datetime
+#     ttf: float
+
+#     def __str__(self):
+#         format_str = f'FireRisks[{self.timestamp} {self.ttf}]'
+
+#         return format_str
+
+
+# class FireRiskPrediction(BaseModel):
+
+#     location: Location
+#     firerisks: list[FireRisk]
+
+#     def __str__(self):
+#         format_str = f'FireRiskPrediction[{self.location}]\n'
+
+#         # Generate list of formatted data points
+#         data_str = [str(data_point) for data_point in self.firerisks]
+
+#         # Join the list of formatted data points
+#         format_str += '\n'.join(data_str)
+
+#         return format_str
+
+# class FireRiskData(models.Model):
+#     location_name = models.CharField(max_length=100) 
+#     temperature = models.FloatField()
+#     humidity = models.FloatField()
+#     wind_speed = models.FloatField()
+#     timestamp = models.DateTimeField()
     
 
-    def __str__(self):
-        return self.location_name  
+#     def __str__(self):
+#         return self.location_name  
