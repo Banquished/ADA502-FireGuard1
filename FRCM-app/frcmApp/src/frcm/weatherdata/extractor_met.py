@@ -2,8 +2,8 @@ import json
 import dateutil.parser
 import numpy as np
 
-from frcm.weatherdata.extractor import Extractor
-from frcm.datamodel.model import *
+from frcmApp.src.frcm.weatherdata.extractor import Extractor
+from frcmApp.src.frcm.datamodel.model import *
 
 
 class METExtractor(Extractor):

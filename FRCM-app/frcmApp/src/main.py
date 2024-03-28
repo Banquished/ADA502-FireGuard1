@@ -1,16 +1,16 @@
 import datetime
 
 from geopy.geocoders import Nominatim
-from frcm.frcapi import FireRiskAPI
-from frcm.weatherdata.client_met import METClient
-from frcm.weatherdata.extractor_met import METExtractor
-from frcm.datamodel.model import Location
+from frcmApp.src.frcm.frcapi import FireRiskAPI
+from frcmApp.src.frcm.weatherdata.client_met import METClient
+from frcmApp.src.frcm.weatherdata.extractor_met import METExtractor
+from frcmApp.src.frcm.datamodel.model import Location
 
 
 
 
 def get_city(latitude, longitude):
-    geolocator = Nominatim(user_agent="frcmApp")
+    geolocator = Nominatim(user_agent="geoapiExercises")
     location = geolocator.reverse(f"{latitude},{longitude}")
     address = location.raw['address']
     city = address.get('city', '')
@@ -85,35 +85,37 @@ if __name__ == "__main__":
 # from frcm.weatherdata.extractor_met import METExtractor
 # from frcm.datamodel.model import Location
 
-# class FireRiskApplication:
-#     def __init__(self, latitude, longitude):
-#         self.latitude = latitude
-#         self.longitude = longitude
-#         self.geolocator = Nominatim(user_agent="geoapiExercises")
-#         self.met_extractor = METExtractor()
-#         self.met_client = METClient(extractor=self.met_extractor)
-#         self.frc = FireRiskAPI(client=self.met_client)
-#         self.location = Location(latitude=latitude, longitude=longitude)
+class FireRiskApplication:
+    def __init__(self, latitude, longitude):
+        self.latitude = latitude
+        self.longitude = longitude
+        self.geolocator = Nominatim(user_agent="geoapiExercises")
+        self.met_extractor = METExtractor()
+        self.met_client = METClient(extractor=self.met_extractor)
+        self.frc = FireRiskAPI(client=self.met_client)
+        self.location = Location(latitude=latitude, longitude=longitude)
 
-#     def get_city(self):
-#         location = self.geolocator.reverse(f"{self.latitude},{self.longitude}")
-#         address = location.raw['address']
-#         city = address.get('city', '')
-#         return city
+    def get_city(self):
+        location = self.geolocator.reverse(f"{self.latitude},{self.longitude}")
+        address = location.raw['address']
+        city = address.get('city', '')
+        return city
     
-#     def fetch_station_id(self, location):
-#         # Placeholder: implement fetching station ID
-#         station_id = METClient.get_nearest_station_id(location)
-#         return station_id
+    def fetch_station_id(self, location):
+        # Placeholder: implement fetching station ID
+        station_id = METClient.get_nearest_station_id(location)
+        return station_id
     
-#     def compute_prediction(self, location, days = 2):
-#         # Placeholder: implement prediction computation
-#         obs_delta = datetime.timedelta(days)
-#         predictions = self.frc.compute_now(location, obs_delta)
-#         return predictions
+    def compute_prediction(self, location, days = 1):
+        # Placeholder: implement prediction computation
+        obs_delta = datetime.timedelta(days)
+        predictions = self.frc.compute_now(location, obs_delta)
+        return predictions
     
-# if __name__ == "__main__":
-#     app = FireRiskApplication(latitude=60.383, longitude=5.3327)  # Example for Bergen
+    
+    
+if __name__ == "__main__":
+    app = FireRiskApplication()  # Example for Bergen
     
 
 

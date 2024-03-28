@@ -1,8 +1,8 @@
 import datetime
 
-from frcm.datamodel.model import FireRiskPrediction, Location, WeatherData, Observations, Forecast
-from frcm.weatherdata.client import WeatherDataClient
-import frcm.fireriskmodel.compute
+from frcmApp.src.frcm.datamodel.model import FireRiskPrediction, Location, WeatherData, Observations, Forecast
+from frcmApp.src.frcm.weatherdata.client import WeatherDataClient
+import frcmApp.src.frcm.fireriskmodel.compute
 
 
 class FireRiskAPI:
@@ -15,7 +15,7 @@ class FireRiskAPI:
 
     def compute(self, wd: WeatherData) -> FireRiskPrediction:
 
-        return frcm.fireriskmodel.compute.compute(wd)
+        return frcmApp.src.frcm.fireriskmodel.compute.compute(wd)
 
     def compute_now(self, location: Location, obs_delta: datetime.timedelta) -> FireRiskPrediction:
 

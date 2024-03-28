@@ -1,6 +1,6 @@
 import dateutil.parser
 
-from frcm.datamodel.model import WeatherDataPoint
+from frcmApp.src.frcm.datamodel.model import WeatherDataPoint
 
 
 def weatherdata_parse(datadict) -> list[WeatherDataPoint]:

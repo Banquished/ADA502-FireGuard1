@@ -5,9 +5,9 @@ import json
 # see .env.example.py in the root dir.
 from decouple import config
 
-from frcm.weatherdata.client import WeatherDataClient
-from frcm.weatherdata.extractor import Extractor
-from frcm.datamodel.model import Location, Observations, Forecast
+from frcmApp.src.frcm.weatherdata.client import WeatherDataClient
+from frcmApp.src.frcm.weatherdata.extractor import Extractor
+from frcmApp.src.frcm.datamodel.model import Location, Observations, Forecast
 
 
 class METClient(WeatherDataClient):
