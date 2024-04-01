@@ -50,3 +50,25 @@ poetry install
 python manage.py runserver 8000
 ```
 -----------------
+
+Docker Images
+--------------
+
+#### Backend
+To build and run the Docker image for the Django backend, use the following commands (This assumes you are in the project directory root):
+```
+cd ./FRCM-app/
+docker build -t backend .
+docker run -p 8000:8000 -d backend
+```
+Your backend app should now be visible at [localhost:8000](localhost:8000) and [127.0.0.1:8000](127.0.0.1:8000).
+
+#### Frontend
+To build and run the Docker image for the React frontend, use the following commands (This assumes you are in the project directory root):
+```
+cd ./frontend/
+docker build -t frontend .
+docker run -p 3000:3000 -d frontend
+```
+
+Your frontend app should now be visible at [localhost:3000](localhost:3000) and [127.0.0.1:3000](127.0.0.1:3000).
