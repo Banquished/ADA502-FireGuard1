@@ -16,7 +16,7 @@ To install this project __locally__, one first has to fork the repository from G
 
 ### Prerequisites
 * [Node.js](https://nodejs.org/en/download/)
-* [Python 3.9](https://www.python.org/downloads/)
+* [Python 3.11](https://www.python.org/downloads/)
 * [Poetry](https://python-poetry.org/docs/#installation)
 * [Docker](https://docs.docker.com/get-docker/)
 
