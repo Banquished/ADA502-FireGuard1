@@ -1,22 +1,27 @@
 version: "3.8"
 
 services:
-  frcm_app:
-    build: /FRCM-app
-    ports:
-      - 8000:8000
-    volumes:
-      - /FRCM-app:/backend
-    image: frcm_app:django-backend
-    container_name: backend
-    command: ["/root/.local/bin/poetry", "run", "python", "manage.py", "runserver", "8000"]
-
   frontend-app:
-    build: /frontend
+    build: ./frontend
     ports:
-      - 3000:3000
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+    environment:
+      - DEBUG="*"
+      - NODE_ENV="development"
     volumes:
-      - /frontend:/app
-    image: frontend-app:react-frontend
+      - ./frontend:/app
     container_name: frontend
     command: ["npm", "start"]
+
+  frcm_app:
+    build: ./FRCM-app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./FRCM-app/frcmApp/src/frcm/weatherdata/.env
+    volumes:
+      - ./FRCM-app:/backend
+    container_name: backend
+    command: ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
