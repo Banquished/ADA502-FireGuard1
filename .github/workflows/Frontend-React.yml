@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [20]
 
     steps:
       - name: Checkout repository
@@ -25,15 +25,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - name: Echo npm config and file paths
-        run: |
-          npm config get prefix
-          ls -l $(npm config get prefix)/lib
-          echo "Home directory: $HOME"
-          echo "Working directory: $PWD"
-          echo "GitHub workspace: $GITHUB_WORKSPACE"
-        working-directory: ./frontend
 
       - name: Install dependencies
         run: npm install
