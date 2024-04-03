@@ -5,9 +5,9 @@ name: Frontend CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -18,22 +18,31 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./frontend
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Echo npm config and file paths
+        run: |
+          npm config get prefix
+          ls -l $(npm config get prefix)/lib
+          echo "Home directory: $HOME"
+          echo "Working directory: $PWD"
+          echo "GitHub workspace: $GITHUB_WORKSPACE"
+        working-directory: ./frontend
 
-      # Tester er ikke implementert skikkelig enda - Placeholder 
-    # - name: Run tests
-    #   run: npm test
-    
-    - name: Build
-      run: npm run build
-      working-directory: ./frontend
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+        # Tester er ikke implementert skikkelig enda - Placeholder
+      # - name: Run tests
+      #   run: npm test
+
+      - name: Build
+        run: npm run build
+        working-directory: ./frontend
