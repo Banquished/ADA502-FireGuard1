@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
 
     steps:
     - name: Checkout repository
@@ -28,6 +28,7 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm install
+      working-directory: ./frontend
 
       # Tester er ikke implementert skikkelig enda - Placeholder 
     # - name: Run tests
@@ -35,3 +36,4 @@ jobs:
     
     - name: Build
       run: npm run build
+      working-directory: ./frontend

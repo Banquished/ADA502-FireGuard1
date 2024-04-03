@@ -27,8 +27,10 @@ jobs:
         pip install poetry
         poetry config virtualenvs.create false
         poetry install --no-dev
+      working-directory: ./FRCM-app
 
     # Tests arent working properly due to changes in the Django structure
     # - name: Run Tests
     #   run: |
     #     python manage.py test
+    #   working-directory: ./FRCM-app
