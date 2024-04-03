@@ -30,7 +30,7 @@ jobs:
         run: npm install
         working-directory: ./frontend
 
-        # Tester er ikke implementert skikkelig enda - Placeholder
+      # Tester er ikke implementert skikkelig enda - Placeholder
       # - name: Run tests
       #   run: npm test
 

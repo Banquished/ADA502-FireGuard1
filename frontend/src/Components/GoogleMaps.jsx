@@ -82,7 +82,7 @@ export default GoogleMaps;
 
 //   useEffect(() => {
 //     // Fetch data from API
-//     fetch('http://your-api-url.com')
+//     fetch('http://localhost:8000/apicall/weatherstations')
 //       .then(response => response.json())
 //       .then(data => setMarkersData(data))
 //       .catch(error => console.error('Error:', error));

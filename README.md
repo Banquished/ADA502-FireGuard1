@@ -1,4 +1,4 @@
-<span style="color:EA4B29">FireGuard 🔥</span>
+<span style="color:red">FireGuard 🔥</span>
 =========
 The FireGuard Project is a part of the course ADA502, which takes place during the spring semester of 2024. 
 
@@ -158,6 +158,8 @@ Credentials for using the MET APIs can be obtained via:
 From the root directory, simply run the following command:
 
 `docker-compose up`
+
+❗When running `docker-compose up`, the frontend application needs around 10-15 minutes to boot properly. This is due to frontend running as a development server, instead of being built as a production server❗
 
 That's it! 
 
