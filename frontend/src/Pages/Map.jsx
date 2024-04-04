@@ -1,7 +1,11 @@
 import "./Map.css";
 import GoogleMaps from "../Components/GoogleMaps.jsx";
+import List from '@mui/material/List';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 
 export default function Map() {
+
   return (
     <>
       <section>
@@ -27,16 +31,22 @@ export default function Map() {
                   that means we're only providing risk calculations for the
                   following locations:
                 </p>
-                <ul>
-                  <li>Oslo</li>
-                  <li>Bergen</li>
-                  <li>Stavanger</li>
-                  <li>Kristiansand</li>
-                </ul>
+                <List
+                sx={{ width: '100%', maxWidth: 360 }}>
+                  <ListItemText>Oslo</ListItemText>
+                  <Divider/>
+                  <ListItemText>Bergen</ListItemText>
+                  <Divider/>
+                  <ListItemText>Stavanger</ListItemText>
+                  <Divider/>
+                  <ListItemText>Kristiansand</ListItemText>
+                  <Divider/>
+                </List>
                 <p>
+                  <br />
                   We're working hard to expand our coverage to more locations.
                   If you have suggestions for our next expansion, please contact
-                  us
+                  us.
                 </p>
               </div>
             </div>
