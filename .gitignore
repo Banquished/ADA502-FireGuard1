@@ -1,3 +1,7 @@
-# Ignore all .env files
 .env*
 .venv
+__pycache__/*
+*.pyc*
+*.idea
+node_modules
+build

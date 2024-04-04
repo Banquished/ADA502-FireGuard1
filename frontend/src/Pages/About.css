@@ -1,0 +1,36 @@
+.container {
+  height: calc(100vh - 126px);
+  max-width: auto;
+  background-color: #1E1E1E;
+  padding: 20px;
+  justify-content: center;
+}
+
+body {
+  background-color: #1E1E1E;
+  color: #E4E4E4;
+}
+
+.text {
+  text-align: left;
+  display: flex;
+  justify-content: left;
+  background-color: #555555;
+  border: 2px solid #F08726;
+  border-radius: 1rem;
+  margin: 10px;
+  padding: 20px;
+  max-height: fit-content;
+}
+
+h3 {
+  color:#ee9037;
+}
+
+#Button {
+  justify-content: center;
+}
+
+.text ul {
+  padding-left: 2rem;
+}
