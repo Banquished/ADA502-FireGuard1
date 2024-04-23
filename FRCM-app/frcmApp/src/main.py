@@ -1,5 +1,3 @@
-import datetime
-
 from geopy.geocoders import Nominatim
 from frcmApp.src.frcm.frcapi import FireRiskAPI
 from frcmApp.src.frcm.weatherdata.client_met import METClient
@@ -8,12 +6,15 @@ from frcmApp.src.frcm.datamodel.model import Location
 from datetime import datetime
 from datetime import date
 from datetime import timedelta
+from django.utils.dateparse import parse_datetime
+from decimal import Decimal
+from frcmApp.models import WeatherData, WeatherStation
 
 
 
 
 def get_city(latitude, longitude):
-    geolocator = Nominatim(user_agent="geoapiExercises")
+    geolocator = Nominatim(user_agent="sivert.hb@outlook.com")
     location = geolocator.reverse(f"{latitude},{longitude}")
     address = location.raw['address']
     city = address.get('city', '')
@@ -118,8 +119,58 @@ class FireRiskApplication:
     def get_observations(self, location):
         today = date.today()
         yesterday = today - timedelta(days=1)
-        data = self.met_client.fetch_observations(location=location, start=yesterday, end=today)
-        return data
+        observations = self.met_client.fetch_observations(location=location, start=yesterday, end=today)
+        
+        # Convert the Pydantic model to a dictionary
+        observations_dict = observations.dict()
+        
+        # Optionally, here is where you would save or further process the data
+        self.save_weather_observations(observations_dict)
+        
+        return observations_dict
+
+    
+    
+    def save_weather_observations(self, data):
+        # Extract station ID and other data
+        station_id = data['source'].split(":")[0]
+
+        # Retrieve the latitude and longitude
+        latitude = Decimal(str(data['location']['latitude']))
+        longitude = Decimal(str(data['location']['longitude']))
+
+        # Ensure the WeatherStation exists in the database
+        station, created = WeatherStation.objects.get_or_create(
+            station_id=station_id,
+            defaults={
+                'latitude': latitude,
+                'longitude': longitude,
+                'city': get_city(latitude, longitude)  # Now using actual function to get city name
+            }
+        )
+
+        # Process observations data
+        for observation in data['data']:
+            print(f"Timestamp: {observation['timestamp']} (Type: {type(observation['timestamp'])})")  # Debug statement
+            temperature = Decimal(str(observation['temperature']))
+            humidity = Decimal(str(observation['humidity']))
+            wind_speed = Decimal(str(observation['wind_speed']))
+            #timestamp = parse_datetime(observation['timestamp'])
+            timestamp = parse_datetime(str(observation['timestamp']))
+
+            # Create and save a WeatherData instance
+            WeatherData.objects.create(
+                station=station,
+                latitude=latitude,
+                longitude=longitude,
+                temperature=temperature,
+                humidity=humidity,
+                wind_speed=wind_speed,
+                created=timestamp
+            )
+
+
+
     
     
     

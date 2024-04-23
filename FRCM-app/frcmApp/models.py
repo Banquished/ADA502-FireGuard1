@@ -17,9 +17,9 @@ class WeatherStation(models.Model):
         return self.city
 
 class WeatherData(models.Model):
-    station_id = models.ForeignKey(WeatherStation, on_delete=models.CASCADE, related_name='weather_data')
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    station = models.ForeignKey(WeatherStation, on_delete=models.CASCADE, related_name='weather_data')
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null= True)
     temperature = models.DecimalField(max_digits=9, decimal_places=6)
     humidity = models.DecimalField(max_digits=9, decimal_places=6)
     wind_speed = models.DecimalField(max_digits=9, decimal_places=6)
