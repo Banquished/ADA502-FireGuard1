@@ -9,4 +9,5 @@ router.register(r'weatherstations', WeatherStationViewSet, basename='weatherstat
 
 urlpatterns = [
     path('', include(router.urls)),  # This will include all URLs handled by the router
+    path('api/fire-risk-prediction/', views.fire_risk_prediction, name='fire_risk_prediction'),
 ]
