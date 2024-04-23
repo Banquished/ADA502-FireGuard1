@@ -15,3 +15,18 @@ class WeatherStation(models.Model):
         ordering = ['-updated', '-created']
     def __str__(self):
         return self.city
+
+class WeatherData(models.Model):
+    station_id = models.ForeignKey(WeatherStation, on_delete=models.CASCADE, related_name='weather_data')
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    temperature = models.DecimalField(max_digits=9, decimal_places=6)
+    humidity = models.DecimalField(max_digits=9, decimal_places=6)
+    wind_speed = models.DecimalField(max_digits=9, decimal_places=6)
+    updated = models.DateTimeField(auto_now=True) #Saves the timestamp when data is saved
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-updated', '-created']
+    def __str__(self):
+        return self.station_id

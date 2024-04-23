@@ -6,6 +6,7 @@ from frcmApp.src.main import FireRiskApplication
 from django.core.exceptions import ValidationError
 from rest_framework import status
 import logging
+from frcmApp.src.frcm.weatherdata.client_met import METClient
 
 
 logger = logging.getLogger(__name__)
@@ -103,5 +104,26 @@ def updateData(request, lat, lon):
     except Exception as e:
         logger.error('Unexpected error occurred: %s', e, exc_info=True)
         return Response({'error': 'An unexpected error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    return Response(data)
+
+
+@api_view(['GET'])
+def get_prediction_data(request, lat, lon):
+    try:
+        app = FireRiskApplication(latitude= lat, longitude=lon)
+        prediction = app.compute_prediction(app.location)
+    except ValueError as e:
+        return Response({'error': 'Invalid latitude or longitude values.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    return Response(prediction)
+
+@api_view(['GET'])
+def get_weather_data(request, lat, lon):
+    try:
+        app = FireRiskApplication(latitude= lat, longitude=lon)
+        data = app.get_observations(location=app.location)
+    except ValueError as e:
+        return Response({'error': 'Invalid latitude or longitude values.'}, status=status.HTTP_400_BAD_REQUEST)
     
     return Response(data)

@@ -5,6 +5,9 @@ from frcmApp.src.frcm.frcapi import FireRiskAPI
 from frcmApp.src.frcm.weatherdata.client_met import METClient
 from frcmApp.src.frcm.weatherdata.extractor_met import METExtractor
 from frcmApp.src.frcm.datamodel.model import Location
+from datetime import datetime
+from datetime import date
+from datetime import timedelta
 
 
 
@@ -111,6 +114,12 @@ class FireRiskApplication:
         obs_delta = datetime.timedelta(days)
         predictions = self.frc.compute_now(location, obs_delta)
         return predictions
+    
+    def get_observations(self, location):
+        today = date.today()
+        yesterday = today - timedelta(days=1)
+        data = self.met_client.fetch_observations(location=location, start=yesterday, end=today)
+        return data
     
     
     
