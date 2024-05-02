@@ -1,6 +1,6 @@
 import abc
 
-from frcm.datamodel.model import Observations, Forecast
+from frcmApp.src.frcm.datamodel.model import Observations, Forecast
 
 
 class Extractor:

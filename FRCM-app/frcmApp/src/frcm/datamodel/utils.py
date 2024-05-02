@@ -1,7 +1,7 @@
 import datetime
 import dateutil.parser
 
-import frcm.datamodel.model as dm
+import frcmApp.src.frcm.datamodel.model as dm
 
 
 def min_time(data: list[dm.WeatherDataPoint]):

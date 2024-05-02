@@ -7,11 +7,26 @@ class WeatherStation(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
     city = models.CharField(max_length=255)
-    prediction = models.FloatField()  # or another appropriate field type depending on your prediction data
-
+    prediction = models.FloatField()
+    updated = models.DateTimeField(auto_now=True) #Saves the timestamp when data is saved
+    created = models.DateTimeField(auto_now_add=True) #Only take a timestamp when the data is created
+    
+    class Meta:
+        ordering = ['-updated', '-created']
     def __str__(self):
-        return f"{self.city} Station"
+        return self.city
 
-    @property
-    def lat_lon(self):
-        return f"{self.latitude}, {self.longitude}"
+class WeatherData(models.Model):
+    station = models.ForeignKey(WeatherStation, on_delete=models.CASCADE, related_name='weather_data')
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null= True)
+    temperature = models.DecimalField(max_digits=9, decimal_places=6)
+    humidity = models.DecimalField(max_digits=9, decimal_places=6)
+    wind_speed = models.DecimalField(max_digits=9, decimal_places=6)
+    updated = models.DateTimeField(auto_now=True) #Saves the timestamp when data is saved
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-updated', '-created']
+    def __str__(self):
+        return self.station_id

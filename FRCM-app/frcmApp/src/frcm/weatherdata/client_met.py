@@ -5,9 +5,9 @@ import json
 # see .env.example.py in the root dir.
 from decouple import config
 
-from frcm.weatherdata.client import WeatherDataClient
-from frcm.weatherdata.extractor import Extractor
-from frcm.datamodel.model import Location, Observations, Forecast
+from frcmApp.src.frcm.weatherdata.client import WeatherDataClient
+from frcmApp.src.frcm.weatherdata.extractor import Extractor
+from frcmApp.src.frcm.datamodel.model import Location, Observations, Forecast
 
 
 class METClient(WeatherDataClient):
@@ -131,3 +131,19 @@ class METClient(WeatherDataClient):
         observations = self.extractor.extract_observations(response.text, location)
 
         return observations
+    
+    def fetch_observations_and_stationid(self, location: Location, start: datetime.datetime, end: datetime.datetime) -> Observations:
+
+#        print(location)
+
+        station_id = self.get_nearest_station_id(location)
+
+#        print(station_id)
+
+        response = self.fetch_observations_raw(station_id, start, end)
+
+#        print(response.text)
+
+        observations = self.extractor.extract_observations(response.text, location)
+
+        return observations, station_id

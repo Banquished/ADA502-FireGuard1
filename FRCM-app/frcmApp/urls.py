@@ -1,12 +1,12 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
 from frcmApp import views
-from .views import WeatherStationViewSet
 
-
-router = DefaultRouter()
-router.register(r'weatherstations', WeatherStationViewSet, basename='weatherstation')
 
 urlpatterns = [
-    path('', include(router.urls)),  # This will include all URLs handled by the router
+    path('', views.getRoutes),
+    path('city/', views.getPredictionAll),
+    path('city/<str:pk>/', views.getPredictioCity),
+    path('update/<str:lat>/<str:lon>/', views.updateData),
+    path('prediction/<str:lat>/<str:lon>/', views.get_prediction_data),
+    path('weather/<str:lat>/<str:lon>/', views.get_weather_data),
 ]
