@@ -78,6 +78,13 @@ Congratulations, that's it! Everything should be up and running.
 
 ## <span style="color:tomato">Method 2: Local Installation</span>
 Before starting step 1, make sure to have downloaded the prerequisites mentioned in the start of this file.
+Additionally, you will also need to add an environment variable file `.env` in the folder `FRCM-app\frcmApp\src\frcm\weatherdata\`.
+
+The env file needs to have the following variables:
+```
+MET_CLIENT_ID = '<INSERT CLIENT ID HERE>'
+MET_CLIENT_SECRET = '<INSERT CLIENT SECRET HERE>'
+```
 
 ### <span style="color:orange">Step 1: Cloning the Repository</span>
 1. Go to the [GitHub page](https://github.com/Banquished/ADA502-FireGuard1) for this repository.
