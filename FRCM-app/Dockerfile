@@ -12,10 +12,8 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev
 
-
 # Copying the rest of the app
 COPY . /backend/
-
 
 # Run at port 8000
 EXPOSE 8000

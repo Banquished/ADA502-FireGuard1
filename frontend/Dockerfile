@@ -1,5 +1,5 @@
 # Use Node.js Alpine base image
-FROM node:alpine
+FROM node:18-alpine
 
 # Create and set the working directory inside the container
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY package*.json /app/
 RUN npm install
 
 # Copy the entire codebase to the working directory
-COPY . /app/
+COPY . .
 
 # Expose the port your app runs on
 EXPOSE 3000
@@ -23,3 +23,8 @@ CMD ["npm", "start"]
 # Commands to build and run the Docker image
 # docker build -t frontend .
 # docker run -p 3000:3000 -d frontend
+
+# Docker Compose uses a while to boot up frontend currently
+# The server might be accessible at http://172.18.0.3:3000/ earlier.
+# Command for running frontend and backend as docker-compose is:
+# docker-compose up --build
