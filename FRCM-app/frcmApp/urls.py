@@ -9,4 +9,5 @@ urlpatterns = [
     path('update/<str:lat>/<str:lon>/', views.updateData),
     path('prediction/<str:lat>/<str:lon>/', views.get_prediction_data),
     path('weather/<str:lat>/<str:lon>/', views.get_weather_data),
+    path('getdata/<str:city>/', views.get_data_city, name='get-data-by-city'),
 ]

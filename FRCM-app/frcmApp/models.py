@@ -4,8 +4,8 @@ from django.db import models
 
 class WeatherStation(models.Model):
     station_id = models.CharField(max_length=255, unique=True, primary_key=True)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     city = models.CharField(max_length=255)
     prediction = models.FloatField()
     updated = models.DateTimeField(auto_now=True) #Saves the timestamp when data is saved
