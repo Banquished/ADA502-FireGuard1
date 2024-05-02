@@ -10,4 +10,5 @@ urlpatterns = [
     path('prediction/<str:lat>/<str:lon>/', views.get_prediction_data),
     path('weather/<str:lat>/<str:lon>/', views.get_weather_data),
     path('getdata/<str:city>/', views.get_data_city, name='get-data-by-city'),
+    path('station/<str:station_id>/', views.get_weather_data_by_station, name='get_weather_data_by_station'),
 ]

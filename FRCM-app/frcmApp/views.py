@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import WeatherStation
-from .serializers import WeatherStationSerializer
+from .models import WeatherStation, WeatherData
+from .serializers import WeatherStationSerializer, WeatherDataSerializer
 from frcmApp.src.main import FireRiskApplication
 from django.core.exceptions import ValidationError
 from rest_framework import status
@@ -141,3 +141,18 @@ def get_data_city(request, city):
     queryset = get_object_or_404(WeatherStation, city__iexact=city)
     serializer = WeatherStationSerializer(queryset)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def get_weather_data_by_station(request, station_id):
+    """
+    Retrieve weather data for a specific weather station by its ID.
+    """
+    try:
+        weather_data = WeatherData.objects.filter(station__station_id=station_id)
+        serializer = WeatherDataSerializer(weather_data, many=True)
+        if weather_data.exists():
+            return Response(serializer.data)
+        else:
+            return Response({'error': 'Weather data not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
