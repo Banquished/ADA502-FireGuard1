@@ -18,10 +18,13 @@ logger = logging.getLogger(__name__)
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
-        'GET /api',
+        'GET /api/',
         'GET /api/city',
-        'GET /api/city/id',
-        'GET /api/update/id'
+        'GET /api/city/<str:pk>/',
+        'GET /api/prediction/<str:lat>/<str:lon>/',
+        'GET /api/station/<str:station_id>/',
+        'GET /api/getdata/<str:city>/',
+        'GET /api/weather/<str:lat>/<str:lon>/',
     ]
     
     return Response(routes)
