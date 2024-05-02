@@ -1,28 +1,26 @@
 # Pull official base image
-FROM python:3.11-alpine
+FROM python:3.11-slim
 
 # Set work directory
-WORKDIR /app
+WORKDIR /backend
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1s
+# Copy Dependencies
+COPY ./pyproject.toml ./poetry.lock /backend/
 
-# Copy Project
-COPY /FRCM-app/FRCM/ /app/FRCM/
-COPY /FRCM-app/db.sqlite3 /app/
-COPY /FRCM-app/manage.py /app/
-COPY /FRCM-app/pyproject.toml /app/
-COPY /FRCM-app/poetry.lock /app/
+# Running bash commands / Installing dependencies
+RUN pip install poetry
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-dev
 
-# Running bash commands
-RUN pip install pipx
-RUN pipx install poetry
-RUN /root/.local/bin/poetry install
-
+# Copying the rest of the app
+COPY . /backend/
 
 # Run at port 8000
 EXPOSE 8000
 
 # Run the app
-CMD ["/root/.local/bin/poetry", "run", "python", "manage.py", "runserver", "8000"]
+CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+# Commands to build and run the Docker image
+# docker build -t backend .
+# docker run -p 8000:8000 -d backend

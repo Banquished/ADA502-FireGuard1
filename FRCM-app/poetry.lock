@@ -167,6 +167,35 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-cors-headers"
+version = "4.3.1"
+description = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django-cors-headers-4.3.1.tar.gz", hash = "sha256:0bf65ef45e606aff1994d35503e6b677c0b26cafff6506f8fd7187f3be840207"},
+    {file = "django_cors_headers-4.3.1-py3-none-any.whl", hash = "sha256:0b1fd19297e37417fc9f835d39e45c8c642938ddba1acce0c1753d3edef04f36"},
+]
+
+[package.dependencies]
+asgiref = ">=3.6"
+Django = ">=3.2"
+
+[[package]]
+name = "djangorestframework"
+version = "3.15.1"
+description = "Web APIs for Django, made easy."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "djangorestframework-3.15.1-py3-none-any.whl", hash = "sha256:3ccc0475bce968608cf30d07fb17d8e52d1d7fc8bfe779c905463200750cbca6"},
+    {file = "djangorestframework-3.15.1.tar.gz", hash = "sha256:f88fad74183dfc7144b2756d0d2ac716ea5b4c7c9840995ac3bfd8ec034333c1"},
+]
+
+[package.dependencies]
+django = ">=3.0"
+
+[[package]]
 name = "docker"
 version = "7.0.0"
 description = "A Python library for the Docker Engine API."
@@ -548,4 +577,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "e75d24f83b8e18d95814918bc9dd7d0b4bc7a2d651c1517a566d7d28dbd88009"
+content-hash = "d212558cb35d9da0c0467bd2629dbfbcd516601fee5aecfa66d160aca7acf10c"
