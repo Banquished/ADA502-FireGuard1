@@ -1,8 +1,10 @@
 <span style="color:red">FireGuard 🔥</span>
 =========
-The FireGuard Project is a part of the course ADA502, which takes place during the spring semester of 2024. 
 
-### Group members:
+## Introduction
+The FireGuard project is part of ADA502 Cloud Computing and Software Systems, a master course at Western Norway University of Applied Sciences. The course covers software technologies that can be used to develop systems employing a combination of web application frontends, cloud-based compute-, communication- and data-storage services, and IoT devices.
+
+The project is undertaken by the following students:
 
 ⭐ Ole-Marius O. Ask
 
@@ -12,20 +14,34 @@ The FireGuard Project is a part of the course ADA502, which takes place during t
 
 ⭐ Halldor Broddi Thorsteinsson
 
+Utilizing API calls to acquire weather data from the Norwegian Meteorological Institute (MET), the group has developed backend and frontend applications to predict and display the fire risk in the form of time-to-flashover values at user-specified locations within Norway.  
+
 ------------------
 
-There are currently 2 different methods of installing this project locally. Below you'll see both of them. The choices are either:
+# <span style="color:orange"> Prerequisites </span>
+* [Node.js](https://nodejs.org/en/download/) - is an open-source, cross-platform JavaScript runtime environment allowing developers to execute JavaScript code outside a web browser. It is commonly used to build scalable network applications like web servers and APIs.
+* [Python 3.11](https://www.python.org/downloads/) - is a computer programming language often used to build websites and software, automate tasks, and analyze data. [Poetry](https://python-poetry.org/docs/#installation) is a tool for dependency management and packaging in Python. It allows you to declare the libraries your project depends on, and it will manage (install/update) them for you.
+* [Docker](https://docs.docker.com/get-docker/) - is a software platform that allows you to build, test, and deploy applications quickly. Docker packages software into standardized units called containers that have everything the software needs to run including libraries, system tools, code, and runtime.
+
+## Contribution & Credits
+This course project extends the research presented in the paper by Strand and L.M. Larsen titled “An Implementation, Evaluation, and Validation of a Dynamic Fire and Conflagration Risk Indicator for Wooden Homes.”
+
+The following repository contains the implementation of the dynamic fire risk indicator described in the submitted paper: [GitHub](https://github.com/selabhvl/dynamic-frcm)
+
+## Getting Started
+This section provides a detailed guide on how to successfully install the FireRisk project, covering each step from initial setup to final configuration to ensure a smooth and efficient installation process.
+
+**Before beginning, ensure that you have downloaded the software mentioned in the Prerequisites section.**
+
+This project can be installed locally using one of two methods described below. The recommended method is:
 
 🔶 __Using DockerHub to run locally (reccomended)__
 
+Alternatively, you can opt for:
+
 🔷 __A full local installation__
 
-
-## <span style="color:orange"> Prerequisites </span>
-* [Node.js](https://nodejs.org/en/download/)
-* [Python 3.11](https://www.python.org/downloads/)
-* [Poetry](https://python-poetry.org/docs/#installation)
-* [Docker](https://docs.docker.com/get-docker/)
+For the first option, [Docker Desktop](https://www.docker.com/products/docker-desktop/) must be installed, and started on your computer.
 
 ## <span style="color:tomato">Method 1 - Installation using premade Docker Images via DockerHub</span>
 
