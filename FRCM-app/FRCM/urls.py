@@ -20,5 +20,5 @@ from frcmApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('apicall/', include('frcmApp.urls'))
+    path('api/', include('frcmApp.urls'))
 ]

@@ -1,36 +1,136 @@
-from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import WeatherStation
 from .serializers import WeatherStationSerializer
+<<<<<<< HEAD
 from django.http import JsonResponse
 from .models import Location  # Update this with the correct import path
 from .frcapi import  FireRiskAPI # Update this with the correct import path
 from .weatherdata.client import WeatherDataClient  # Adjust the import as neede
+=======
+from frcmApp.src.main import FireRiskApplication
+from django.core.exceptions import ValidationError
+from rest_framework import status
+import logging
+from frcmApp.src.frcm.weatherdata.client_met import METClient
+>>>>>>> 2b40695d85cf143892656a3e57d8148abd1ae301
 
-class WeatherStationViewSet(viewsets.ModelViewSet):
+
+logger = logging.getLogger(__name__)
+
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        'GET /api',
+        'GET /api/city',
+        'GET /api/city/id',
+        'GET /api/update/id'
+    ]
+    
+    return Response(routes)
+
+@api_view(['GET'])
+def getPredictionAll(request):
     queryset = WeatherStation.objects.all()
-    serializer_class = WeatherStationSerializer
+    serializer = WeatherStationSerializer(queryset, many=True)
+    return Response(serializer.data)
 
-    @action(detail=False, methods=['get'])
-    def predictionset(self, request):
-        queryset = WeatherStation.objects.all()
-        serializer = WeatherStationSerializer(queryset, many=True)
-        return Response({'prediction': serializer.data})
+@api_view(['GET'])
+def getPredictioCity(request, pk):
+    queryset = WeatherStation.objects.get(id=pk)
+    serializer = WeatherStationSerializer(queryset, many=False)
+    return Response(serializer.data)
+
+# @api_view(['GET'])
+# def updateData(request, lat, long):
+#     app = FireRiskApplication(latitude=lat, longitude=long)
+#     city = app.get_city()
+#     predictions = app.compute_prediction(app.location, days=1)
+#     data = {
+#         'city': city,
+#         'predictions': predictions
+#     }
+#     return Response(data)
+
+# @api_view(['GET'])
+# def updateData(request, lat, lon):
+#     try:
+#         lat = float(lat)
+#         lon = float(lon)
+#     except ValueError as e:
+#         return Response({'error': 'Invalid latitude or longitude values.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    def fire_risk_prediction(request):
-    # You can use GET parameters or path variables to specify the location
-        location_id = request.GET.get('location_id')
+#     try:
+#         app = FireRiskApplication(latitude=lat, longitude=lon)
+#         #city = app.get_city()
+#         predictions = app.compute_prediction(app.location, days=1)
+#     except Exception as e:
+#         # Log the exception
+#         logger.error('Unexpected error occurred: %s', e, exc_info=True)
+#         return Response({'error': 'An unexpected error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-    # Fetch the location details from your database or parse the request data
-        location = Location.objects.get(id=location_id)
+#     data = {
+#         #'city': city,
+#         'predictions': predictions
+#     }
+#     return Response(data)
+
+@api_view(['GET'])
+def updateData(request, lat, lon):
+    try:
+        lat = float(lat)
+        lon = float(lon)
+    except ValueError as e:
+        return Response({'error': 'Invalid latitude or longitude values.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    # Initialize your WeatherDataClient and FireRiskAPI
-        weather_client = WeatherDataClient()
-        fire_risk_api = FireRiskAPI(client=weather_client)
+    try:
+        app = FireRiskApplication(latitude=lat, longitude=lon)
+        all_predictions = app.compute_prediction(app.location, days=1)
+        
+        # Simplified for explanation - Extracting 'firerisks' directly and assuming it's structured as expected
+        #firerisks = all_predictions.get('firerisks', [])
+        data = all_predictions
+        # # Check if 'firerisks' is not empty and contains dictionaries with a 'timestamp' and 'ttf'
+        # if firerisks:
+        #     # Assuming 'firerisks' is a list of dictionaries with 'timestamp' and 'ttf'
+        #     most_recent_firerisk = max(firerisks, key=lambda x: x['timestamp'])
+        # else:
+        #     most_recent_firerisk = {}
+        
+        # # Include location in the response
+        # location_info = {
+        #     'latitude': lat,
+        #     'longitude': lon
+        # }
+        
+        # data = {
+        #     'location': location_info,
+        #     'prediction': most_recent_firerisk
+        # }
+    except Exception as e:
+        logger.error('Unexpected error occurred: %s', e, exc_info=True)
+        return Response({'error': 'An unexpected error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-    # Perform the calculation (the parameters will depend on your specific implementation)
-        prediction = fire_risk_api.compute_now(location, datetime.timedelta(hours=1))  # Example timedelta
+    return Response(data)
+
+
+@api_view(['GET'])
+def get_prediction_data(request, lat, lon):
+    try:
+        app = FireRiskApplication(latitude= lat, longitude=lon)
+        prediction = app.compute_prediction(app.location)
+    except ValueError as e:
+        return Response({'error': 'Invalid latitude or longitude values.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    # Convert the prediction to a dictionary and return as JSON
-        return JsonResponse(prediction.to_dict(), safe=False)
+    return Response(prediction)
+
+@api_view(['GET'])
+def get_weather_data(request, lat, lon):
+    try:
+        app = FireRiskApplication(latitude= lat, longitude=lon)
+        data = app.get_observations(location=app.location)
+    except ValueError as e:
+        return Response({'error': 'Invalid latitude or longitude values.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    return Response(data)

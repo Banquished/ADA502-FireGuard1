@@ -1,5 +1,5 @@
-from frcm.datamodel.model import *
-from frcm.fireriskmodel.parameters import delta_t
+from frcmApp.src.frcm.datamodel.model import *
+from frcmApp.src.frcm.fireriskmodel.parameters import delta_t
 import numpy as np
 
 

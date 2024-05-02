@@ -8,31 +8,39 @@
 # import django
 # os.environ['DJANGO_SETTINGS_MODULE'] = 'FRCM.settings'
 # django.setup()
-import sys 
-sys.path.insert(0, "src")
-sys.path.insert(0, "../src/FRCM/")
+# import sys 
+# sys.path.insert(0, "src")
+# sys.path.insert(0, "../src/FRCM/")
 
 
-print(sys.path)
+# print(sys.path)
 
-from frcm.frcapi import FireRiskAPI
-import settings
+# from frcm.frcapi import FireRiskAPI
 
-from src.main import get_city
+
+# from src.main import get_city
+
+# import os
+# #os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FRCM.settings")
+
+
+# import django
+# django.setup()
+
+# from django.core.management import call_command
 
 import os
-#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FRCM.settings")
-
-settings.co
-
 import django
+
+# Set the correct path to your Django project's settings module here.
+# This path is relative to the root of your Django project.
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'FRCM.settings')
 django.setup()
 
-from django.core.management import call_command
 
 import datetime
 from models import WeatherStation
-from main import FireRiskApplication
+from src.main import FireRiskApplication
 
 
 class Runner:

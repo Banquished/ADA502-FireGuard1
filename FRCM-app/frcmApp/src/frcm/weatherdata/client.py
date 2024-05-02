@@ -1,6 +1,6 @@
 import abc
 
-from frcm.datamodel.model import *
+from frcmApp.src.frcm.datamodel.model import *
 
 
 class WeatherDataClient:
