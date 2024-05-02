@@ -1,5 +1,13 @@
 ![banner](https://github.com/Banquished/ADA502-FireGuard1/assets/105752308/1421ee56-b5ef-437a-84e7-967b6c5fe046)
 
+![Maintenance](https://img.shields.io/maintenance/yes/2024)
+![GitHub repo size](https://img.shields.io/github/repo-size/Banquished/ADA502-FireGuard1)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Banquished/ADA502-FireGuard1)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Banquished/ADA502-FireGuard1/FRCM-pipeline.yml)
+![GitHub language count](https://img.shields.io/github/languages/count/Banquished/ADA502-FireGuard1)
+
+
+
 <span style="color:red">FireGuard 🔥</span>
 =========
 
