@@ -18,7 +18,7 @@ Utilizing API calls to acquire weather data from the Norwegian Meteorological In
 
 ------------------
 
-# <span style="color:orange"> Prerequisites </span>
+## <span style="color:orange"> Prerequisites </span>
 * [Node.js](https://nodejs.org/en/download/) - is an open-source, cross-platform JavaScript runtime environment allowing developers to execute JavaScript code outside a web browser. It is commonly used to build scalable network applications like web servers and APIs.
 * [Python 3.11](https://www.python.org/downloads/) - is a computer programming language often used to build websites and software, automate tasks, and analyze data. [Poetry](https://python-poetry.org/docs/#installation) is a tool for dependency management and packaging in Python. It allows you to declare the libraries your project depends on, and it will manage (install/update) them for you.
 * [Docker](https://docs.docker.com/get-docker/) - is a software platform that allows you to build, test, and deploy applications quickly. Docker packages software into standardized units called containers that have everything the software needs to run including libraries, system tools, code, and runtime.
