@@ -1,8 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import Header from './Components/Header';
-import Router from './Components/Router';
-
 
 // Mock child components
 jest.mock('./Components/Header', () => () => <div>Header component</div>);
@@ -19,3 +16,5 @@ test('renders Header and Router components', () => {
 // Header
 
 // Router
+
+// GoogleMaps
