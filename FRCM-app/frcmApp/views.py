@@ -82,25 +82,25 @@ def updateData(request, lat, lon):
         all_predictions = app.compute_prediction(app.location, days=1)
         
         # Simplified for explanation - Extracting 'firerisks' directly and assuming it's structured as expected
-        firerisks = all_predictions.get('firerisks', [])
+        #firerisks = all_predictions.get('firerisks', [])
+        data = all_predictions
+        # # Check if 'firerisks' is not empty and contains dictionaries with a 'timestamp' and 'ttf'
+        # if firerisks:
+        #     # Assuming 'firerisks' is a list of dictionaries with 'timestamp' and 'ttf'
+        #     most_recent_firerisk = max(firerisks, key=lambda x: x['timestamp'])
+        # else:
+        #     most_recent_firerisk = {}
         
-        # Check if 'firerisks' is not empty and contains dictionaries with a 'timestamp' and 'ttf'
-        if firerisks:
-            # Assuming 'firerisks' is a list of dictionaries with 'timestamp' and 'ttf'
-            most_recent_firerisk = max(firerisks, key=lambda x: x['timestamp'])
-        else:
-            most_recent_firerisk = {}
+        # # Include location in the response
+        # location_info = {
+        #     'latitude': lat,
+        #     'longitude': lon
+        # }
         
-        # Include location in the response
-        location_info = {
-            'latitude': lat,
-            'longitude': lon
-        }
-        
-        data = {
-            'location': location_info,
-            'prediction': most_recent_firerisk
-        }
+        # data = {
+        #     'location': location_info,
+        #     'prediction': most_recent_firerisk
+        # }
     except Exception as e:
         logger.error('Unexpected error occurred: %s', e, exc_info=True)
         return Response({'error': 'An unexpected error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

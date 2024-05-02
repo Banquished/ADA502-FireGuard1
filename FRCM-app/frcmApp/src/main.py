@@ -112,9 +112,22 @@ class FireRiskApplication:
     
     def compute_prediction(self, location, days = 1):
         # Placeholder: implement prediction computation
-        obs_delta = datetime.timedelta(days)
+        #obs_delta = datetime.timedelta(days)
+        obs_delta = timedelta(days)
         predictions = self.frc.compute_now(location, obs_delta)
-        return predictions
+
+        today = datetime.now().date()
+        todays_predictions = [pred for pred in predictions.firerisks if pred.timestamp.date() == today]
+        #print (predictions)
+        for pred in todays_predictions:
+            print(pred)
+
+        # highest_prediction = max(todays_predictions, key=lambda x: x.fire_risk_value, default=None)
+        # if highest_prediction:
+        #     print(f"Highest prediction for today: {highest_prediction}")
+        # else:
+        #     print("No predictions for today.")
+        return todays_predictions
     
     def get_observations(self, location):
         today = date.today()
