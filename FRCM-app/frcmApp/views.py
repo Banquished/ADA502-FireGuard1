@@ -117,6 +117,35 @@ def updateData(request, lat, lon):
     
     return Response(result, status=status.HTTP_200_OK)
 
+def dataScheduling():
+    lat = 60.383
+    lon = 5.3327
+    try:
+        app = FireRiskApplication(latitude=lat, longitude=lon)
+        all_predictions = app.compute_prediction(app.location, days=1)
+        #location = Location(latitude=lat, longitude=lon)
+        # Simplified for explanation - Extracting 'firerisks' directly and assuming it's structured as expected
+        #firerisks = all_predictions.get('firerisks', [])
+        data = all_predictions[18]
+        fire_risk_value = data.ttf
+        print(fire_risk_value)
+        city = app.get_city()
+        station_id = app.fetch_station_id(app.location)
+
+        print(type(lat))
+        station, created = WeatherStation.objects.update_or_create(
+                station_id=station_id,
+                defaults={
+                    'latitude': (lat),
+                    'longitude': (lon),
+                    'city': city,
+                    'prediction': fire_risk_value
+                }
+            )
+        print("Completed")
+    except Exception as e:
+        logger.error('Unexpected error occurred: %s', e, exc_info=True)
+
 
 @api_view(['GET'])
 def get_prediction_data(request, lat, lon):
