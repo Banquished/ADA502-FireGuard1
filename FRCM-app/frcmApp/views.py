@@ -7,6 +7,9 @@ from django.core.exceptions import ValidationError
 from rest_framework import status
 import logging
 from frcmApp.src.frcm.weatherdata.client_met import METClient
+from frcmApp.src.frcm.datamodel.model import Location
+from django.shortcuts import get_object_or_404
+
 
 
 logger = logging.getLogger(__name__)
@@ -80,32 +83,36 @@ def updateData(request, lat, lon):
     try:
         app = FireRiskApplication(latitude=lat, longitude=lon)
         all_predictions = app.compute_prediction(app.location, days=1)
-        
+        #location = Location(latitude=lat, longitude=lon)
         # Simplified for explanation - Extracting 'firerisks' directly and assuming it's structured as expected
         #firerisks = all_predictions.get('firerisks', [])
-        data = all_predictions
-        # # Check if 'firerisks' is not empty and contains dictionaries with a 'timestamp' and 'ttf'
-        # if firerisks:
-        #     # Assuming 'firerisks' is a list of dictionaries with 'timestamp' and 'ttf'
-        #     most_recent_firerisk = max(firerisks, key=lambda x: x['timestamp'])
-        # else:
-        #     most_recent_firerisk = {}
-        
-        # # Include location in the response
-        # location_info = {
-        #     'latitude': lat,
-        #     'longitude': lon
-        # }
-        
-        # data = {
-        #     'location': location_info,
-        #     'prediction': most_recent_firerisk
-        # }
+        data = all_predictions[18]
+        fire_risk_value = data.ttf
+        print(fire_risk_value)
+        city = app.get_city()
+        station_id = app.fetch_station_id(app.location)
+
+        print(type(lat))
+        station, created = WeatherStation.objects.update_or_create(
+                station_id=station_id,
+                defaults={
+                    'latitude': (lat),
+                    'longitude': (lon),
+                    'city': city,
+                    'prediction': fire_risk_value
+                }
+            )
+        result = {
+                'city': city,
+                'station': station_id,
+                'prediction': data
+                
+            }
     except Exception as e:
         logger.error('Unexpected error occurred: %s', e, exc_info=True)
         return Response({'error': 'An unexpected error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-    return Response(data)
+    return Response(result, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -127,3 +134,10 @@ def get_weather_data(request, lat, lon):
         return Response({'error': 'Invalid latitude or longitude values.'}, status=status.HTTP_400_BAD_REQUEST)
     
     return Response(data)
+
+@api_view(['GET'])
+def get_data_city(request, city):
+    # Fetch the weather station by city or return 404 if not found
+    queryset = get_object_or_404(WeatherStation, city__iexact=city)
+    serializer = WeatherStationSerializer(queryset)
+    return Response(serializer.data)
