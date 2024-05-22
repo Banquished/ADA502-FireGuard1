@@ -2,14 +2,17 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import WeatherStation
 from .serializers import WeatherStationSerializer
+<<<<<<< HEAD
+from django.http import JsonResponse
+from .models import Location  # Update this with the correct import path
+from .frcapi import  FireRiskAPI # Update this with the correct import path
+from .weatherdata.client import WeatherDataClient  # Adjust the import as neede
+=======
 from frcmApp.src.main import FireRiskApplication
 from django.core.exceptions import ValidationError
 from rest_framework import status
 import logging
 from frcmApp.src.frcm.weatherdata.client_met import METClient
-from frcmApp.src.frcm.datamodel.model import Location
-from django.shortcuts import get_object_or_404
-
 
 
 logger = logging.getLogger(__name__)
@@ -134,10 +137,3 @@ def get_weather_data(request, lat, lon):
         return Response({'error': 'Invalid latitude or longitude values.'}, status=status.HTTP_400_BAD_REQUEST)
     
     return Response(data)
-
-@api_view(['GET'])
-def get_data_city(request, city):
-    # Fetch the weather station by city or return 404 if not found
-    queryset = get_object_or_404(WeatherStation, city__iexact=city)
-    serializer = WeatherStationSerializer(queryset)
-    return Response(serializer.data)
