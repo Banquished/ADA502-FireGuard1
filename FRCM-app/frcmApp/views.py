@@ -13,7 +13,6 @@ from django.core.exceptions import ValidationError
 from rest_framework import status
 import logging
 from frcmApp.src.frcm.weatherdata.client_met import METClient
->>>>>>> 2b40695d85cf143892656a3e57d8148abd1ae301
 
 
 logger = logging.getLogger(__name__)
@@ -87,32 +86,36 @@ def updateData(request, lat, lon):
     try:
         app = FireRiskApplication(latitude=lat, longitude=lon)
         all_predictions = app.compute_prediction(app.location, days=1)
-        
+        #location = Location(latitude=lat, longitude=lon)
         # Simplified for explanation - Extracting 'firerisks' directly and assuming it's structured as expected
         #firerisks = all_predictions.get('firerisks', [])
-        data = all_predictions
-        # # Check if 'firerisks' is not empty and contains dictionaries with a 'timestamp' and 'ttf'
-        # if firerisks:
-        #     # Assuming 'firerisks' is a list of dictionaries with 'timestamp' and 'ttf'
-        #     most_recent_firerisk = max(firerisks, key=lambda x: x['timestamp'])
-        # else:
-        #     most_recent_firerisk = {}
-        
-        # # Include location in the response
-        # location_info = {
-        #     'latitude': lat,
-        #     'longitude': lon
-        # }
-        
-        # data = {
-        #     'location': location_info,
-        #     'prediction': most_recent_firerisk
-        # }
+        data = all_predictions[18]
+        fire_risk_value = data.ttf
+        print(fire_risk_value)
+        city = app.get_city()
+        station_id = app.fetch_station_id(app.location)
+
+        print(type(lat))
+        station, created = WeatherStation.objects.update_or_create(
+                station_id=station_id,
+                defaults={
+                    'latitude': (lat),
+                    'longitude': (lon),
+                    'city': city,
+                    'prediction': fire_risk_value
+                }
+            )
+        result = {
+                'city': city,
+                'station': station_id,
+                'prediction': data
+                
+            }
     except Exception as e:
         logger.error('Unexpected error occurred: %s', e, exc_info=True)
         return Response({'error': 'An unexpected error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-    return Response(data)
+    return Response(result, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
