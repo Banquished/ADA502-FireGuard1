@@ -9,6 +9,7 @@ from datetime import timedelta
 from django.utils.dateparse import parse_datetime
 from decimal import Decimal
 from frcmApp.models import WeatherData, WeatherStation
+import math
 
 
 
@@ -128,45 +129,80 @@ class FireRiskApplication:
 
     
     
+    # def save_weather_observations(self, data):
+    #     # Extract station ID and other data
+    #     station_id = data['source'].split(":")[0]
+
+    #     # Retrieve the latitude and longitude
+    #     latitude = Decimal(str(data['location']['latitude']))
+    #     longitude = Decimal(str(data['location']['longitude']))
+
+    #     # Ensure the WeatherStation exists in the database
+    #     station, created = WeatherStation.objects.get_or_create(
+    #         station_id=station_id,
+    #         defaults={
+    #             'latitude': latitude,
+    #             'longitude': longitude,
+    #             'city': get_city(latitude, longitude)  # Now using actual function to get city name
+    #         }
+    #     )
+
+    #     # Process observations data
+    #     for observation in data['data']:
+    #         print(f"Timestamp: {observation['timestamp']} (Type: {type(observation['timestamp'])})")  # Debug statement
+    #         temperature = Decimal(str(observation['temperature']))
+    #         humidity = Decimal(str(observation['humidity']))
+    #         wind_speed = Decimal(str(observation['wind_speed']))
+    #         #timestamp = parse_datetime(observation['timestamp'])
+    #         timestamp = parse_datetime(str(observation['timestamp']))
+
+    #         # Create and save a WeatherData instance
+    #         WeatherData.objects.create(
+    #             station=station,
+    #             latitude=latitude,
+    #             longitude=longitude,
+    #             temperature=temperature,
+    #             humidity=humidity,
+    #             wind_speed=wind_speed,
+    #             created=timestamp
+    #         )
+
     def save_weather_observations(self, data):
         # Extract station ID and other data
         station_id = data['source'].split(":")[0]
 
         # Retrieve the latitude and longitude
-        latitude = Decimal(str(data['location']['latitude']))
-        longitude = Decimal(str(data['location']['longitude']))
+        latitude = data['location']['latitude']
+        longitude = data['location']['longitude']
 
         # Ensure the WeatherStation exists in the database
         station, created = WeatherStation.objects.get_or_create(
             station_id=station_id,
             defaults={
-                'latitude': latitude,
-                'longitude': longitude,
-                'city': get_city(latitude, longitude)  # Now using actual function to get city name
+                'latitude': latitude if not math.isnan(latitude) else 0.0,  # Default to 0.0 if NaN
+                'longitude': longitude if not math.isnan(longitude) else 0.0,
+                'city': get_city(latitude, longitude)  # Using actual function to get city name
             }
         )
 
         # Process observations data
         for observation in data['data']:
-            print(f"Timestamp: {observation['timestamp']} (Type: {type(observation['timestamp'])})")  # Debug statement
-            temperature = Decimal(str(observation['temperature']))
-            humidity = Decimal(str(observation['humidity']))
-            wind_speed = Decimal(str(observation['wind_speed']))
-            #timestamp = parse_datetime(observation['timestamp'])
-            timestamp = parse_datetime(str(observation['timestamp']))
+            temperature = observation['temperature']
+            humidity = observation['humidity']
+            wind_speed = observation['wind_speed']
 
-            # Create and save a WeatherData instance
+            if math.isnan(temperature) or math.isnan(humidity) or math.isnan(wind_speed):
+                continue  # Skip this observation because it contains NaN values
+
             WeatherData.objects.create(
                 station=station,
-                latitude=latitude,
-                longitude=longitude,
-                temperature=temperature,
-                humidity=humidity,
-                wind_speed=wind_speed,
-                created=timestamp
+                latitude=Decimal(str(latitude)),
+                longitude=Decimal(str(longitude)),
+                temperature=Decimal(str(temperature)),
+                humidity=Decimal(str(humidity)),
+                wind_speed=Decimal(str(wind_speed)),
+                created=parse_datetime(str(observation['timestamp']))
             )
-
-
 
     
     
